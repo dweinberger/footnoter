@@ -134,7 +134,7 @@ function footnoteIt(){
 					footnotemarker = "<span class='" + bodymarkerclass + "'><a name='fn"  + (footnotectr + footnotestartnumber - 1) + "'><a href=#fnend" + (footnotectr + footnotestartnumber - 1) + "><sup>" + (footnotectr + footnotestartnumber - 1)+ "</sup></a></span>";
 				}
 				if (includecss == false) {
-					footnotemarker = "<a name='fn" + (footnotectr + footnotestartnumber - 1) + "'><sup><a href=#fnend" + (footnotectr + footnotestartnumber - 1) + ">" + (footnotectr + footnotestartnumber - 1) + "</a></sup>";
+					footnotemarker = "<sup><a name='fn" + "'><a href=#fnend" + (footnotectr + footnotestartnumber - 1) + ">" + (footnotectr + footnotestartnumber - 1) + "</a></sup>";
 				}
 				}
 				//s = substituteString(source, footnotemarker, p0, p1 + delim1.length);
@@ -173,15 +173,15 @@ function footnoteIt(){
 			}	
 			if (whichmode == "HTML"){
 			if ((includecss == true) && (includeonlycss == true)) {
-				footnote = "<p><span class='" + fnnumberclass + "'><a name='fnend" + (i + footnotestartnumber) + "'><a href='#fn" + (footnotestartnumber + i) + "'>" + (footnotestartnumber + i) + "</a></span>";
+				footnote = "<p><span class='" + fnnumberclass + "'><a name='fnend" + (i + footnotestartnumber) + "' href='#fn" + (footnotestartnumber + i) + "'>" + (footnotestartnumber + i) + "</a></span>";
 				footnote = footnote + "<span class='fnnoteclass" + "'>" + footnotes[i] + "</span></p>";
 			}
 			if ((includecss == true) && (includeonlycss == false)) {
-				footnote = "<p><span class='" + fnnumberclass + "'><a name='fnend" + (i + footnotestartnumber) + "'><sup><a href='#fn" + (i + footnotestartnumber) + "'>" + (i + 1) + "</a></sup></span>";
+				footnote = "<p><span class='" + fnnumberclass + "'><sup><a name='fnend" + (i + footnotestartnumber) + "' href='#fn" + (i + footnotestartnumber) + "'>" + (i + 1) + "</a></sup></span>";
 				footnote = footnote + "<span class='fnnoteclass" + "'>" + footnotes[i] + "</span></p>";
 			}
 			if (includecss == false) {
-				footnote = "<p><a name='fnend" + ((i + footnotestartnumber)) + "'><sup><a href='#fn" + (i + footnotestartnumber) + "'>" + (i + footnotestartnumber) + "</a></sup>";
+				footnote = "<p><sup><a name='fnend" + ((i + footnotestartnumber)) +  "' href='#fn" + (i + footnotestartnumber) + "'>" + (i + footnotestartnumber) + "</a></sup>";
 				footnote = footnote + footnotes[i] + "\n\n";
 			}
 			}
