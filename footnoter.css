@@ -59,3 +59,16 @@ p{
 #helpbutton{
 	font-size:0.6em;color: yellow;margin-left:200px;
 }
+#intro{
+	position: absolute;
+	top: 35;
+	left: 200px;
+	width: 500px;
+	padding: 10px;
+	-webkit-box-shadow: 0px 17px 24px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 17px 24px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 17px 24px 0px rgba(0,0,0,0.75);
+	z-index: 200;
+	background-color: #FFE995;
+	
+}

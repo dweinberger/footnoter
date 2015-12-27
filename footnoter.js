@@ -219,7 +219,7 @@ function footnoteIt(){
 	
 	
 	// --- show wysi view
-	if (mode == "HTML"){
+	if (whichmode == "HTML"){
 	var wysi = document.getElementById("wysidiv");
 	$(wysi).show();
 	wysi.innerHTML = "<p class='pclass'><b>WYSIWYG DISPLAY OF RESULTS for proofing</b></p><p>" + s + "<p><hr width='100px' align='center'></p>" + fnbox.value;
@@ -282,6 +282,11 @@ function findHighestFootnote(forcedStartNumber){
 	var prev=0, p0, p1, c, lastfound=0;
 	var highest = forcedStartNumber;
 	var done = false;
+	// are there any existing footnotes?
+	p0= sourcetxt.indexOf("fn");
+	if (p0 == -1){
+		return highest;
+	}
 	while (done == false){
 		p0= sourcetxt.indexOf("fn",prev);
 		if (p0 > -1){
@@ -309,10 +314,11 @@ function findHighestFootnote(forcedStartNumber){
 		}
 	else { // no more matches
 		done = true;
+		highest = hightest + 1;
 		}
 	}
 	
-	return highest + 1;
+	return highest
 		
 }
 		
