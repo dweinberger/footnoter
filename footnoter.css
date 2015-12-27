@@ -1,0 +1,61 @@
+#banner{
+	font-family:"Helvetica Neue",Helvetica,Verdana,Arial,Sans Serif;
+	font-size: 18pt;
+	background-color: #274E13;
+	color: white;
+
+}
+#radiobtns{
+	font-family:"Helvetica Neue",Helvetica,Verdana,Arial,Sans Serif;
+}
+p{
+	font-family:Geneva,Arial;
+	font-size: 12pt;
+}
+.wysi{
+	background-color: #fffd88;
+	font-family: Georgia,Garamond;
+	font-size:12pt;
+	width:90%;
+}
+.txtbox{
+	width:90%;
+	font-size:12pt;
+}
+.txtboxcss{
+	width:110px;
+	height: 20px;
+}
+.pclass{
+	font-family:Geneva,Arial;
+	font-size: 12pt;
+	background-color: coral;
+	color:#274E13;
+}
+.introclass{
+	font-family:Geneva,Arial;
+	font-size: 10pt;
+}
+#statusdiv{
+	border: 2px red solid;
+	width: 66%;
+	margin-bottom: 15px;
+	padding: 8px;
+}
+#status{
+	color: #0C16AF;
+	font-family:Geneva,Arial;
+	font-size: 12pt;
+}
+.prefsclass{
+	height: 20px;
+}
+#prefsdiv{
+	border: 1px gray dashed;
+	padding: 5px;
+	margin-top: 10px;
+	width: 90%;
+}
+#helpbutton{
+	font-size:0.6em;color: yellow;margin-left:200px;
+}

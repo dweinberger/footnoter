@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title>Footnote-Remover</title>
+	<script type="text/javascript" src="footnote_remover.js"></script>
+	<link type="text/css" rel="stylesheet" href= "footnoter.css">
+</head>
+
+<body>
+
+<h1>Footnoter-Remover v. 0.1 BETA</h1>
+
+<p class="introclass">As you're writing an HTML-based document, you may want to include footnotes (well, endnotes, actually). I find the easiest way to do this is to embed the footnote text exactly where I want the 
+footnote marker to be, using [[...]] as my marker. Footnoter (this page) pulls the footnotes out of an HTML text, leaves a superscripted, hyperlinked number, and builds a list
+of hyperlinked footnotes. You can enclose your footnotes in any characters you want; the default is double brackets. For example, in this sentence [[this is a
+sample footnote]], the phrase "this is a sample footnote" would be treated as a footnote. Please note that nested footnotes will just confuse things.
+
+<p class="introclass">This is primitive. It's presented to you without warrantee or any obligation
+of any kind. Do what you want with it, but take it as-is. Thanks. -- <em>David Weinberger, May 15, 2009, self@evident.com</em></p>
+<p class="introclass"><em></>Nod your head in agreement to the above by pressing this button.</em>
+<input type="button" value="I understand that this may suck" onclick="showItAll()">
+</p>
+
+<div id="everything" >
+
+<!-- STATUS -->
+<div id="statusdiv"  style="display:none;">
+  <p class="pclass">Status</p>
+  <p id="status"></p>
+</div>
+
+<!-- SOURCE -->
+<div id="sourcetxtdiv">
+	<p class="pclass">Paste in the text to be de-footnoted:</p>
+	<textarea id="sourcetxt" cols=50 rows=10 class="txtbox">This is sample text<a name='fn1'><sup><a href=#fnend1>1</a></sup> that you should replace.<a name='fn2'><sup><a href=#fnend2>2</a></sup> FOOTNOTES <p><a name='fnend1'><sup><a href='#fn1'>1</a></sup>This is a footnote
+
+<p><a name='fnend2'><sup><a href='#fn2'>2</a></sup>This sample uses the default delimiters
+
+
+</textarea>
+    <!-- <textarea id="sourcetxt" cols=50 rows=10 class="txtbox">A [[footnote 1]] B [[footnote2]] C [[footnote 3]] end</textarea>; -->
+	</div>
+
+<!-- BUTTONS --> 
+<div id="controlsdiv">
+	<input type="button" value="De-Footnote it" onclick="deFootnoteIt()">
+	<input type="button" value="Clear it all" onclick="clearItAll()">
+	
+</div>
+
+<!-- FOOTNOTED TEXT-->
+<div id="destintxtdiv">
+	<p class="pclass">Text with footnotes reinserted:</p>
+	<textarea id="destintxt" name="destin" cols=50 rows=10 class="txtbox"></textarea><br>
+	<input type="button" value="Select all" onClick="selectAll()">
+   
+</div>
+
+
+
+<!-- WYSI -->
+<div id="wysidiv" class="wysi">
+</div>
+
+<!-- PREFS-->
+<div id="prefsdiv">
+	<p class="pclass">Preferences</p>
+  <p>Remove spaces before footnote markers (so superscripted numbers are immediately next to the previous text) 
+  <input type=checkbox id="removespaceschk" checked></p>
+  <p>Enter the opening delimiter: <textarea id="delim0txt" class="prefsclass" cols=5 >[[</textarea> &nbsp;
+  Closing delimiter: <textarea id="delim1txt" cols=5  class="prefsclass">]]</textarea>
+  
+  </p>
+  
+	
+	</p>
+   
+  </p>
+
+</div>
+</body>
+</html>

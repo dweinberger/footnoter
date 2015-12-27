@@ -1,0 +1,117 @@
+<html>
+<head>
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<title>Footnoter</title>
+	<script type="text/javascript" src="footnoter.js"></script>
+	<link type="text/css" rel="stylesheet" href= "footnoter.css">
+	<script src="./includes/jquery-2.1.4.min.js"></script>
+	
+<script>	
+ //  $( document ).ready(function() {
+//     $("#radiobtns input:radio").click(function() {
+// 		var whichmode = $("input[name=mode]:checked").val();
+// 		if (whichmode == "HTML"){
+// 			
+// 		}
+// 		});
+// 	});
+	
+</script>
+	
+</head>
+
+<body>
+
+<div id="banner">&nbsp;&nbsp;Footnoter v. 0.2 <span id="helpbutton"  onclick="$('#intro').slideToggle(1000)">Help<span></div>
+
+<div id="intro" style="display:none">
+<p class="introclass">As you're writing an HTML-based or markdown document, you may want to include footnotes (well, endnotes, actually). I find the easiest way to do this is to embed the footnote text exactly where I want the footnote marker to be, using [[...]] as my marker. Footnoter (this page) pulls the footnotes out of a text, leaves a superscripted, hyperlinked number, and builds a list
+of hyperlinked footnotes. You can enclose your footnotes in any characters you want; the default is double brackets. For example, in this sentence [[this is a
+sample footnote]], the phrase "this is a sample footnote" would be treated as a footnote. Please note that nested footnotes will just confuse things.
+
+<p class="introclass">The resulting page is presented in two parts: the body and the list of footnotes. If you're doing HTML, below that is a wysiwyg display of what the finished product will look like in a browser.</p>
+<p class="introclass">Footnoter doesn't touch your original file, of course. Just be careful not to paste its results over your original and good file, since its results may be hugely broken.</p><p class="introclass">This is primitive. It's presented to you without warrantee or any obligation of any kind. Do what you want with it, but take it as-is. Thanks. -- <em>David Weinberger, May 15, 2009, david@weinberger.org</em></p>
+
+</p>
+</div>
+
+<div id="everything" style="display:block;">
+<div id="radiobtns">
+<input type="radio" name="mode" value="HTML">HTML</td>
+<input type="radio" name="mode" value="MARKDOWN" checked >Markdown
+</div>
+
+<!-- STATUS -->
+<div id="statusdiv"  style="display:none;">
+  <p class="pclass">Status</p>
+  <p id="status"></p>
+</div>
+
+<!-- SOURCE -->
+<div id="sourcetxtdiv">
+	<p class="pclass">Paste in the text to be footnoted:</p>
+	<textarea id="sourcetxt" cols=50 rows=10 class="txtbox">This is sample text [[This is a footnote]]. You place footnotes inline, between your choice of delimiters.[[This sample uses the default delimiters]] </textarea>
+    <!-- <textarea id="sourcetxt" cols=50 rows=10 class="txtbox">A [[footnote 1]] B [[footnote2]] C [[footnote 3]] end</textarea>; -->
+	</div>
+
+<!-- BUTTONS --> 
+<div id="controlsdiv">
+	<input type="button" value="Footnote it" onclick="footnoteIt()">
+	<input type="button" value="Clear it all" onclick="clearItAll()">
+	
+</div>
+
+<!-- FOOTNOTED TEXT-->
+<div id="destintxtdiv" style="display:none;">
+	<p class="pclass">Text with footnotes removed:</p>
+	<textarea id="destintxt" cols=50 rows=10 class="txtbox"></textarea>
+</div>
+
+<!-- FOOTNOTES-->
+<div id="footnotetxtdiv"  style="display:none;">
+	<p class="pclass">Footnotes:</p>
+	<textarea id="footnotetxt" cols=50 rows=10 class="txtbox"></textarea>
+</div>
+
+<!-- WYSI -->
+<div id="wysidiv" class="wysi" style="display:none">
+</div>
+
+<!-- PREFS-->
+<div id="prefsdiv">
+	<p class="pclass">Preferences</p>
+  <p>Remove spaces before footnote markers (so superscripted numbers are immediately next to the previous text) 
+  <input type=checkbox id="removespaceschk" checked></p>
+  <p>Enter the opening delimiter: <textarea id="delim0txt" class="prefsclass" cols=5 >[[</textarea> &nbsp;
+  Closing delimiter: <textarea id="delim1txt" cols=5  class="prefsclass">]]</textarea>
+  Starting number for footnotes: <textarea id="startnumbertxt" cols=3  class="prefsclass">1</textarea>
+  </p>
+  <p>  HTML to surround the footnote markers in the text. (Default: superscript them.)<br>Start: <textarea id="html0txt" cols=10  class="prefsclass">&lt;sup&gt;</textarea>
+   End: <textarea id="html1txt" cols=10  class="prefsclass">&lt;/sup&gt;</textarea>
+   <input type="button" value="Try it out" onclick="insertSampleMarker()">
+    Example: <span id="samplemarker" style="background-color:#F1FFD8;border-width:1px;">&nbsp;sample text<sup>1</sup>.&nbsp;</span>
+	<!-- CSS or HTML? -->
+	<script>
+		var helptext="CSS lets you specify the formatting you prefer for the elements of your document. In this case, you can ";
+		helptext = helptext + "name classes for the marker left in the text, the number that prefaces the footnote, and the footnote ";
+		helptext = helptext + "itself. You can name the classes yourself or use the defaults.\n\nYou can also choose to include the ";
+		helptext = helptext + "HTML markup you specify in the top part of the Preferences section with the CSS, or just use the CSS.";
+		helptext = helptext +"\n\n\nIf you don't understand what all this is about, just skip the Advanced section."
+	</script>
+	<p><b>Advanced (CSS)</b> <span  onclick="document.getElementById('cssspan').style.display='block';">[<u>Show</u>]</span> <span  onclick="document.getElementById('cssspan').style.display='none';">[<u>Hide</u>]</span>&nbsp;[<u><span onclick="alert(helptext)">Help</span></u>]</p>
+	<span id="cssspan" style="display:none;">
+	<p><input type="checkbox" id="csscheck" onclick="document.getElementById('cssonlycheckspan').style.display = this.checked ? 'block' : 'none'">Insert CSS class name for markers in text, markers in footnotes, and footnotes<br>
+	<textarea id="bodymarkerclasstxt" class="txtboxcss">fn_in_text</textarea> Number in body ("This is a sample<span style="background-color:yellow"><sup>1</sup></span>. And more.)<br>
+	<textarea id="fnnumberclasstxt" class="txtboxcss">fn_number</textarea> Number preceding the footnote. (<span style="background-color:yellow"><sup>1</sup></span>Sample footnote.)<br>
+	<textarea id="fnnoteclasstxt" class="txtboxcss">fn_note</textarea> The text of the footnote itself. (<sup>1</sup><span style="background-color:yellow">Sample footnote.</span>)<br>
+	<span id="cssonlycheckspan" style="display:none;">
+	   <input type="checkbox" id="csscheckonly">Insert <u>only</u> CSS class names (no HTML formatting)<br>
+	</span>
+	</span>	
+	</p>
+   
+  </p>
+
+</div>
+</body>
+</html>
